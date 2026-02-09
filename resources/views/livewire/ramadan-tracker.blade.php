@@ -1,28 +1,56 @@
-<div class="space-y-4" wire:poll.keep-alive>
+<div class="space-y-4" wire:poll.keep-alive x-data="{ lang: localStorage.getItem('lang') || 'en' }" x-init="window.addEventListener('storage', () => lang = localStorage.getItem('lang') || 'en'); setInterval(() => lang = localStorage.getItem('lang') || 'en', 500)">
     <!-- Legend/Guide -->
     <div class="glass rounded-2xl   p-4 border border-orange-100">
         <div class="flex flex-wrap items-center justify-center gap-4 text-sm">
             <div class="flex items-center gap-2">
-                <span class="font-semibold text-gray-700">নামাজ:</span>
-                <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">F = ফজর</span>
-                <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">Z = যোহর</span>
-                <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">A = আসর</span>
-                <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">M = মাগরিব</span>
-                <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">E = এশা</span>
-                <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">T = তারাবীহ</span>
+                <!-- English -->
+                <template x-if="lang === 'en'">
+                    <div class="flex items-center gap-2">
+                        <span class="font-semibold text-gray-700">Prayers:</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">F = Fajr</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">Z = Zuhr</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">A = Asr</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">M = Maghrib</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">E = Isha</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">T = Taraweeh</span>
+                    </div>
+                </template>
+                <!-- Bangla -->
+                <template x-if="lang === 'bn'">
+                    <div class="flex items-center gap-2">
+                        <span class="font-semibold text-gray-700">নামাজ:</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">F = ফজর</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">Z = যোহর</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">A = আসর</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">M = মাগরিব</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">E = এশা</span>
+                        <span class="px-2 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium">T = তারাবীহ</span>
+                    </div>
+                </template>
             </div>
         </div>
     </div>
 
     <!-- Tracker Grid -->
     <div class="glass rounded-2xl   border border-orange-100 overflow-hidden">
-        <!-- Table Header -->
-        <div class="hidden md:grid grid-cols-12 gap-2 p-4 bg-gradient-to-r from-primary-500 to-amber-500 text-white font-semibold text-sm">
-            <div class="col-span-1 text-center">দিন</div>
-            <div class="col-span-3 text-center">নামাজ (F Z A M E T)</div>
-            <div class="col-span-2 text-center">কুরআন তিলাওয়াত</div>
-            <div class="col-span-6 text-center">ভালো অভ্যাস</div>
-        </div>
+        <!-- Table Header - English -->
+        <template x-if="lang === 'en'">
+            <div class="hidden md:grid grid-cols-12 gap-2 p-4 bg-gradient-to-r from-primary-500 to-amber-500 text-white font-semibold text-sm">
+                <div class="col-span-1 text-center">Day</div>
+                <div class="col-span-3 text-center">Prayers (F Z A M E T)</div>
+                <div class="col-span-2 text-center">Quran Recitation</div>
+                <div class="col-span-6 text-center">Good Habits</div>
+            </div>
+        </template>
+        <!-- Table Header - Bangla -->
+        <template x-if="lang === 'bn'">
+            <div class="hidden md:grid grid-cols-12 gap-2 p-4 bg-gradient-to-r from-primary-500 to-amber-500 text-white font-semibold text-sm">
+                <div class="col-span-1 text-center">দিন</div>
+                <div class="col-span-3 text-center">নামাজ (F Z A M E T)</div>
+                <div class="col-span-2 text-center">কুরআন তিলাওয়াত</div>
+                <div class="col-span-6 text-center">ভালো অভ্যাস</div>
+            </div>
+        </template>
         
         <!-- Days Loop -->
         <div class="divide-y divide-orange-100">
@@ -68,14 +96,14 @@
                             type="text" 
                             wire:blur="updateQuran({{ $day }}, $event.target.value)"
                             value="{{ $entry['quran_tilawat'] ?? '' }}"
-                            placeholder="জুয/সূরা"
+                            :placeholder="lang === 'en' ? 'Juz/Surah' : 'জুয/সূরা'"
                             class="w-full px-3 py-2 rounded-full border-2 border-gray-200 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 text-sm text-center text-gray-700 placeholder-gray-400 transition-all duration-200"
                         >
                     </div>
                     
                     <!-- Habits (5 pill toggles) -->
                     <div class="md:col-span-6 flex items-center justify-center gap-2 flex-wrap">
-                        @foreach(['hadith' => 'হাদিস', 'sadka' => 'সদকা', 'durood' => 'দুরুদ', 'istigfaar' => 'ইস্তিগফার', 'dua' => 'দুআ'] as $habit => $label)
+                        @foreach(['hadith' => ['en' => 'Hadith', 'bn' => 'হাদিস'], 'sadka' => ['en' => 'Sadaqah', 'bn' => 'সদকা'], 'durood' => ['en' => 'Durood', 'bn' => 'দুরুদ'], 'istigfaar' => ['en' => 'Istighfar', 'bn' => 'ইস্তিগফার'], 'dua' => ['en' => 'Dua', 'bn' => 'দুআ']] as $habit => $labels)
                             <button 
                                 wire:click="toggleHabit({{ $day }}, '{{ $habit }}')"
                                 class="habit-pill px-3 py-1.5 rounded-full text-xs font-medium border-2 cursor-pointer transition-all duration-200  
@@ -89,10 +117,10 @@
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                                         </svg>
-                                        {{ $label }}
+                                        <span x-text="lang === 'en' ? '{{ $labels['en'] }}' : '{{ $labels['bn'] }}'"></span>
                                     </span>
                                 @else
-                                    {{ $label }}
+                                    <span x-text="lang === 'en' ? '{{ $labels['en'] }}' : '{{ $labels['bn'] }}'"></span>
                                 @endif
                             </button>
                         @endforeach
@@ -104,7 +132,10 @@
     
     <!-- Quick Stats -->
     <div class="glass rounded-2xl   p-6 border border-orange-100">
-        <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">📊 আপনার অগ্রগতি</h3>
+        <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">
+            <span x-show="lang === 'en'">📊 Your Progress</span>
+            <span x-show="lang === 'bn'" x-cloak>📊 আপনার অগ্রগতি</span>
+        </h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             @php
                 $totalFajr = collect($entries)->sum('fajr');
@@ -114,20 +145,36 @@
             @endphp
             <div class="bg-gradient-to-br from-primary-100 to-amber-100 rounded-xl p-4 text-center">
                 <div class="text-3xl font-bold text-primary-600">{{ $totalFajr }}</div>
-                <div class="text-sm text-gray-600">ফজর নামাজ</div>
+                <div class="text-sm text-gray-600">
+                    <span x-show="lang === 'en'">Fajr Prayers</span>
+                    <span x-show="lang === 'bn'" x-cloak>ফজর নামাজ</span>
+                </div>
             </div>
             <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl p-4 text-center">
                 <div class="text-3xl font-bold text-purple-600">{{ $totalTaraweeh }}</div>
-                <div class="text-sm text-gray-600">তারাবীহ</div>
+                <div class="text-sm text-gray-600">
+                    <span x-show="lang === 'en'">Taraweeh</span>
+                    <span x-show="lang === 'bn'" x-cloak>তারাবীহ</span>
+                </div>
             </div>
             <div class="bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl p-4 text-center">
                 <div class="text-3xl font-bold text-green-600">{{ $totalSadka }}</div>
-                <div class="text-sm text-gray-600">সদকা</div>
+                <div class="text-sm text-gray-600">
+                    <span x-show="lang === 'en'">Sadaqah</span>
+                    <span x-show="lang === 'bn'" x-cloak>সদকা</span>
+                </div>
             </div>
             <div class="bg-gradient-to-br from-blue-100 to-cyan-100 rounded-xl p-4 text-center">
                 <div class="text-3xl font-bold text-blue-600">{{ $totalDua }}</div>
-                <div class="text-sm text-gray-600">দুআ</div>
+                <div class="text-sm text-gray-600">
+                    <span x-show="lang === 'en'">Dua</span>
+                    <span x-show="lang === 'bn'" x-cloak>দুআ</span>
+                </div>
             </div>
         </div>
     </div>
+    
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 </div>
