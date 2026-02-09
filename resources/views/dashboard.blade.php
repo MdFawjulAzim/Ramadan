@@ -6,9 +6,9 @@
 <div class="min-h-screen py-6 px-4 sm:px-6 lg:px-8">
     <!-- Header -->
     <header class="max-w-7xl mx-auto mb-8">
-        <div class="glass rounded-2xl shadow-lg p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-orange-100">
+        <div class="glass rounded-2xl   p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-orange-100">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-amber-400 flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-amber-400 flex items-center justify-center text-white text-xl font-bold  ">
                     {{ substr(auth()->user()->name, 0, 1) }}
                 </div>
                 <div>
@@ -20,7 +20,7 @@
             </div>
             
             <div class="flex items-center gap-4">
-                <h1 class="title-script text-4xl sm:text-5xl text-primary-600 drop-shadow">
+                <h1 class="title-script text-4xl sm:text-5xl text-primary-600 ">
                     Ramadan Tracker
                 </h1>
                 

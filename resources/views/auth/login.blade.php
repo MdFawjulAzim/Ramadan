@@ -9,7 +9,7 @@
         <div class="text-center mb-10">
             <div class="relative inline-block">
                 <div class="absolute -inset-4 bg-gradient-to-r from-orange-400 to-amber-300 rounded-full blur-xl opacity-40 animate-pulse"></div>
-                <h1 class="relative title-script text-6xl md:text-7xl text-primary-600 drop-shadow-lg">
+                <h1 class="relative title-script text-6xl md:text-7xl text-primary-600 drop- ">
                     Ramadan Tracker
                 </h1>
             </div>
@@ -19,7 +19,7 @@
         </div>
 
         <!-- Login Card -->
-        <div class="glass rounded-3xl shadow-2xl p-8 space-y-8 border border-orange-100">
+        <div class="glass rounded-3xl p-8 space-y-8 border border-orange-100">
             <div class="text-center">
                 <h2 class="text-2xl font-bold text-gray-800">
                     স্বাগতম! 🕌
@@ -81,7 +81,7 @@
                 <!-- Submit Button -->
                 <button 
                     type="submit" 
-                    class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-primary-500 to-amber-500 hover:from-primary-600 hover:to-amber-600 text-white font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+                    class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-primary-500 to-amber-500 hover:from-primary-600 hover:to-amber-600 text-white font-semibold text-lg transform hover:-translate-y-1 transition-all duration-200"
                 >
                     <span class="flex items-center justify-center gap-3">
                         শুরু করুন

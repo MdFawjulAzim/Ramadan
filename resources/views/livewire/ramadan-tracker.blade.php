@@ -1,6 +1,6 @@
 <div class="space-y-4" wire:poll.keep-alive>
     <!-- Legend/Guide -->
-    <div class="glass rounded-2xl shadow-lg p-4 border border-orange-100">
+    <div class="glass rounded-2xl   p-4 border border-orange-100">
         <div class="flex flex-wrap items-center justify-center gap-4 text-sm">
             <div class="flex items-center gap-2">
                 <span class="font-semibold text-gray-700">নামাজ:</span>
@@ -15,7 +15,7 @@
     </div>
 
     <!-- Tracker Grid -->
-    <div class="glass rounded-2xl shadow-lg border border-orange-100 overflow-hidden">
+    <div class="glass rounded-2xl   border border-orange-100 overflow-hidden">
         <!-- Table Header -->
         <div class="hidden md:grid grid-cols-12 gap-2 p-4 bg-gradient-to-r from-primary-500 to-amber-500 text-white font-semibold text-sm">
             <div class="col-span-1 text-center">দিন</div>
@@ -44,7 +44,7 @@
                         @foreach(['fajr' => 'F', 'zuhr' => 'Z', 'asr' => 'A', 'maghrib' => 'M', 'esha' => 'E', 'taraweeh' => 'T'] as $prayer => $label)
                             <button 
                                 wire:click="togglePrayer({{ $day }}, '{{ $prayer }}')"
-                                class="prayer-check w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold border-2 cursor-pointer shadow-sm
+                                class="prayer-check w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold border-2 cursor-pointer  
                                     {{ ($entry[$prayer] ?? false) 
                                         ? 'bg-gradient-to-br from-primary-500 to-amber-400 border-primary-500 text-white' 
                                         : 'bg-white border-gray-300 text-gray-400 hover:border-primary-400 hover:text-primary-500' 
@@ -78,7 +78,7 @@
                         @foreach(['hadith' => 'হাদিস', 'sadka' => 'সদকা', 'durood' => 'দুরুদ', 'istigfaar' => 'ইস্তিগফার', 'dua' => 'দুআ'] as $habit => $label)
                             <button 
                                 wire:click="toggleHabit({{ $day }}, '{{ $habit }}')"
-                                class="habit-pill px-3 py-1.5 rounded-full text-xs font-medium border-2 cursor-pointer transition-all duration-200 shadow-sm
+                                class="habit-pill px-3 py-1.5 rounded-full text-xs font-medium border-2 cursor-pointer transition-all duration-200  
                                     {{ ($entry[$habit] ?? false) 
                                         ? 'bg-green-100 border-green-500 text-green-700' 
                                         : 'bg-white border-gray-300 text-gray-500 hover:border-green-400 hover:text-green-600' 
@@ -103,7 +103,7 @@
     </div>
     
     <!-- Quick Stats -->
-    <div class="glass rounded-2xl shadow-lg p-6 border border-orange-100">
+    <div class="glass rounded-2xl   p-6 border border-orange-100">
         <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">📊 আপনার অগ্রগতি</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             @php
